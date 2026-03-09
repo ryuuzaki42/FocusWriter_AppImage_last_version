@@ -5,7 +5,7 @@ ingredients:
   sources:
     - deb http://archive.ubuntu.com/ubuntu/ resolute main universe
   #packages:
-  #  - libproxy1v5
+  #  - libproxy1v5 # Error libpxbackend-1.0.so not found
 
 script:
   - set -x
