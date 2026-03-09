@@ -4,6 +4,8 @@ ingredients:
   dist: resolute
   sources:
     - deb http://archive.ubuntu.com/ubuntu/ resolute main universe
+  packages:
+    - libproxy1v5
 
 script:
   - set -x
