@@ -12,16 +12,15 @@ jobs:
   build:
     name: Build
     # https://docs.github.com/en/actions/using-github-hosted-runners/about-github-hosted-runners
-    # runs-on: ubuntu-latest # Not working with  ubuntu-latest /  ubuntu-22.04
+    runs-on: ubuntu-latest # Not working with  ubuntu-latest /  ubuntu-22.04
     # Error: /lib/x86_64-linux-gnu/libgio-2.0.so.0: undefined symbol: g_module_open_full
-    runs-on: ubuntu-22.04
+    #runs-on: ubuntu-22.04
 
     steps:
     - uses: actions/checkout@master
 
     - name: Install fuse and libfuse2
-      run: |
-        sudo apt install fuse libfuse2
+      run: sudo apt install fuse libfuse2
 
     - name: Get pkg2appimage
       run: |
@@ -29,7 +28,7 @@ jobs:
         #wget https://github.com/AppImageCommunity/pkg2appimage/releases/download/continuous/pkg2appimage--x86_64.AppImage
         wget https://github.com/AppImageCommunity/pkg2appimage/releases/download/continuous/pkg2appimage-1eceb30-x86_64.AppImage -O pkg2appimage--x86_64.AppImage
         chmod +x pkg2appimage--x86_64.AppImage
-        ls -lah
+        pwd; ls -lah
 
     - name: Make AppImage
       run:  |
@@ -46,7 +45,7 @@ jobs:
         fileNameNew=$(echo "$fileName" | sed 's/.AppImage//')
         mv "$fileName" "${fileNameNew}-1_JB.AppImage"
         md5sum "${fileNameNew}-1_JB.AppImage" > "${fileNameNew}-1_JB.AppImage.md5"
-        ls -lah
+        pwd; ls -lah
 
     - uses: xresloader/upload-to-github-release@main
       env:
@@ -57,4 +56,3 @@ jobs:
           verbose: true
           draft: false
           default_release_name: "FocusWriter V in AppImage"
-
